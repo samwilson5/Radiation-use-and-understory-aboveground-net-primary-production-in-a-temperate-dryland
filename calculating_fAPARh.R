@@ -96,7 +96,8 @@ for (i in 1:80) {
     mutate(year = format(as.Date(date, format = "%Y-%m-%d"), "%Y")) %>%
     left_join(annual_maxes,join_by(year==year)) %>%
     left_join(annual_mins,join_by(year==year))
-  
+  # replace seasonal with S(t)
+  seasonal[,1] = ((seasonal[,1] - seasonal[,5])/(seasonal[,4] - seasonal[,5]))
   seasonal = seasonal %>% rename(seasonalNDVI = x)
   seasonal$ht = 1
   # calculate the herbaceous component, blanco et al 2016
