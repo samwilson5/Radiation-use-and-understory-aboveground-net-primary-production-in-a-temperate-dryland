@@ -108,7 +108,7 @@ for (i in 1:80) {
   ndvi = left_join(daily,seasonal,join_by(date==date))
   remainder = mean(ndvi_stl$time.series[,3])
   # calculate fAPARh
-  ndvi$fAPARh = 0.89*ndvi$ht - remainder #blanco et al 2016
+  ndvi$fAPARh = 0.89*ndvi$ht - 0.05 #blanco et al 2022
   
   ndvi$plot = (point_dates %>% filter(plot == i))$plot
   dates = (data %>% filter(imageryDate >= '2023-04-15' & imageryDate <= (point_dates %>% filter(plot == i))$date))
